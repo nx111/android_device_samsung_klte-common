@@ -1,0 +1,13 @@
+/modem       vfat	/dev/block/platform/msm_sdcc.1/by-name/modem /dev/block/platform/msm_sdcc.1/by-name/mdm
+/firmware    vfat	/dev/block/platform/msm_sdcc.1/by-name/apnhlos
+/boot        emmc	/dev/block/platform/msm_sdcc.1/by-name/boot
+/recovery    emmc       /dev/block/platform/msm_sdcc.1/by-name/recovery
+/system      ext4	/dev/block/platform/msm_sdcc.1/by-name/system
+/data        ext4	/dev/block/platform/msm_sdcc.1/by-name/userdata
+/cache	     ext4	/dev/block/platform/msm_sdcc.1/by-name/cache
+/efs	     ext4	/dev/block/platform/msm_sdcc.1/by-name/efs
+/modemst1    emmc	/dev/block/platform/msm_sdcc.1/by-name/modemst1
+/modemst2    emmc	/dev/block/platform/msm_sdcc.1/by-name/modemst2
+/external_sd vfat	/dev/block/mmcblk1p1 /dev/block/mmcblk1  flags=display="Micro SDcard";storage;removable
+/usbstorage  vfat	/dev/block/sda1 /dev/block/sda           flags=display="USB-OTG";storage;removable
+/misc	     emmc	/dev/block/platform/msm_sdcc.1/by-name/fota
