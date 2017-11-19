@@ -2788,7 +2788,7 @@ int responseInt(RadioResponseInfo& responseInfo, int serial, int responseType, R
     int ret = -1;
 
     if (response == NULL || responseLen != sizeof(int)) {
-        RLOGE("responseInt: Invalid response");
+        RLOGE("responseInt: Invalid response (responseLen=%d)",responseLen);
         if (e == RIL_E_SUCCESS) responseInfo.error = RadioError::INVALID_RESPONSE;
     } else {
         int *p_int = (int *) response;
@@ -3270,7 +3270,7 @@ int radio::getSignalStrengthResponse(int slotId,
                 && responseLen != sizeof(RIL_SignalStrength_v8)
                 && responseLen != sizeof(RIL_SignalStrength_v6)
                 && responseLen != sizeof(RIL_SignalStrength_v5))) {
-            RLOGE("getSignalStrengthResponse: Invalid response);
+            RLOGE("getSignalStrengthResponse: Invalid response (responseLen=%d)",responseLen);
             if (e == RIL_E_SUCCESS) responseInfo.error = RadioError::INVALID_RESPONSE;
         } else {
             convertRilSignalStrengthToHal(response, responseLen, signalStrength);
@@ -3593,7 +3593,8 @@ int radio::getVoiceRegistrationStateResponse(int slotId,
                if (e == RIL_E_SUCCESS) responseInfo.error = RadioError::INVALID_RESPONSE;
         } else if (s_vendorFunctions->version <= 14) {
             if (numStrings != 15) {
-                RLOGE("getVoiceRegistrationStateResponse Invalid response: NULL");
+                RLOGE("getVoiceRegistrationStateResponse Invalid response: NULL (numStrings=%d,s_vendorFunctions->version=%d)",
+			numStrings,s_vendorFunctions->version);
                 if (e == RIL_E_SUCCESS) responseInfo.error = RadioError::INVALID_RESPONSE;
             } else {
                 char **resp = (char **) response;
@@ -3612,7 +3613,7 @@ int radio::getVoiceRegistrationStateResponse(int slotId,
                     (RIL_VoiceRegistrationStateResponse *)response;
 
             if (responseLen != sizeof(RIL_VoiceRegistrationStateResponse)) {
-                RLOGE("getVoiceRegistrationStateResponse Invalid response: NULL");
+                RLOGE("getVoiceRegistrationStateResponse Invalid response: NULL (responseLen=%d,sizeof(RIL_VoiceRegistrationStateResponse)=%d",responseLen,sizeof(RIL_VoiceRegistrationStateResponse));
                 if (e == RIL_E_SUCCESS) responseInfo.error = RadioError::INVALID_RESPONSE;
             } else {
                 voiceRegResponse.regState = (RegState) voiceRegState->regState;
@@ -3656,7 +3657,8 @@ int radio::getDataRegistrationStateResponse(int slotId,
         } else if (s_vendorFunctions->version <= 14) {
             int numStrings = responseLen / sizeof(char *);
             if ((numStrings != 6) && (numStrings != 11)) {
-                RLOGE("getDataRegistrationStateResponse Invalid response: NULL");
+                RLOGE("getDataRegistrationStateResponse Invalid response: NULL (numStrings=%d,s_vendorFunctions->version=%d)",
+			numStrings,s_vendorFunctions->version);
                 if (e == RIL_E_SUCCESS) responseInfo.error = RadioError::INVALID_RESPONSE;
             } else {
                 char **resp = (char **) response;
@@ -3672,7 +3674,7 @@ int radio::getDataRegistrationStateResponse(int slotId,
                     (RIL_DataRegistrationStateResponse *)response;
 
             if (responseLen != sizeof(RIL_DataRegistrationStateResponse)) {
-                RLOGE("getDataRegistrationStateResponse Invalid response: NULL");
+                RLOGE("getDataRegistrationStateResponse Invalid response: NULL (responseLen=%d,sizeof(RIL_VoiceRegistrationStateResponse)=%d",responseLen,sizeof(RIL_VoiceRegistrationStateResponse));
                 if (e == RIL_E_SUCCESS) responseInfo.error = RadioError::INVALID_RESPONSE;
             } else {
                 dataRegResponse.regState = (RegState) dataRegState->regState;
@@ -3701,7 +3703,6 @@ int radio::getOperatorResponse(int slotId,
 #if VDBG
     RLOGD("getOperatorResponse: serial %d", serial);
 #endif
-
     int mqanelements;
     char value[PROPERTY_VALUE_MAX];
     property_get("ro.ril.telephony.mqanelements", value, "4");
@@ -3715,7 +3716,8 @@ int radio::getOperatorResponse(int slotId,
         hidl_string numeric;
         int numStrings = responseLen / sizeof(char *);
         if (response == NULL || numStrings != mqanelements - 2) {
-            RLOGE("getOperatorResponse Invalid response: NULL");
+            RLOGE("getOperatorResponse Invalid response: NULL (numStrings=%d, maqnelements - 2 = %d)",
+		 numStrings, mqanelements - 2);
             if (e == RIL_E_SUCCESS) responseInfo.error = RadioError::INVALID_RESPONSE;
 
         } else {
@@ -3781,7 +3783,8 @@ SendSmsResult makeSendSmsResult(RadioResponseInfo& responseInfo, int serial, int
     SendSmsResult result = {};
 
     if (response == NULL || responseLen != sizeof(RIL_SMS_Response)) {
-        RLOGE("makeSendSmsResult: Invalid response: NULL);
+        RLOGE("makeSendSmsResult: Invalid response: NULL (responseLen=%d, sizeof(RIL_SMS_Response)=%d)",
+		responseLen, sizeof(RIL_SMS_Response));
         if (e == RIL_E_SUCCESS) responseInfo.error = RadioError::INVALID_RESPONSE;
         result.ackPDU = hidl_string();
     } else {
@@ -3888,7 +3891,8 @@ IccIoResult responseIccIo(RadioResponseInfo& responseInfo, int serial, int respo
     IccIoResult result = {};
 
     if (response == NULL || responseLen != sizeof(RIL_SIM_IO_Response)) {
-        RLOGE("Invalid response: NULL");
+        RLOGE("responseIccIo: Invalid response: NULL (responseLen=%d,sizeof(RIL_SIM_IO_Response)=%d)",
+		responseLen, sizeof(RIL_SIM_IO_Response));
         if (e == RIL_E_SUCCESS) responseInfo.error = RadioError::INVALID_RESPONSE;
         result.simResponse = hidl_string();
     } else {
@@ -4350,7 +4354,6 @@ int radio::getAvailableNetworksResponse(int slotId,
 #if VDBG
     RLOGD("getAvailableNetworksResponse: serial %d", serial);
 #endif
-
     int mqanelements;
     char value[PROPERTY_VALUE_MAX];
     property_get("ro.ril.telephony.mqanelements", value, "4");
@@ -5800,7 +5803,7 @@ int radio::iccOpenLogicalChannelResponse(int slotId,
         hidl_vec<int8_t> selectResponse;
         int numInts = responseLen / sizeof(int);
         if (response == NULL || responseLen % sizeof(int) != 0) {
-            RLOGE("iccOpenLogicalChannelResponse Invalid response: NULL");
+            RLOGE("iccOpenLogicalChannelResponse Invalid response: NULL (responeLen=%d)", responseLen);
             if (response != NULL) {
                 if (e == RIL_E_SUCCESS) responseInfo.error = RadioError::INVALID_RESPONSE;
             }
@@ -6149,7 +6152,8 @@ LceStatusInfo responseLceStatusInfo(RadioResponseInfo& responseInfo, int serial,
     LceStatusInfo result = {};
 
     if (response == NULL || responseLen != sizeof(RIL_LceStatusInfo)) {
-        RLOGE("Invalid response: NULL");
+        RLOGE("responseLceStatusInfo: Invalid response: NULL (responseLen=%d, sizeof(RIL_LceStatusInfo)=%d)",
+		responseLen, sizeof(RIL_LceStatusInfo));
         if (e == RIL_E_SUCCESS) responseInfo.error = RadioError::INVALID_RESPONSE;
     } else {
         RIL_LceStatusInfo *resp = (RIL_LceStatusInfo *) response;
