@@ -25,13 +25,14 @@ BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom androidboot.bootd
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01e00000
+BOARD_CUSTOM_BOOTIMG := true
+TARGET_KERNEL_SOURCE := kernel/samsung/msm8974
 
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 131072
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 BOARD_SUPPRESS_SECURE_ERASE := true
-BOARD_CUSTOM_BOOTIMG_MK := device/samsung/klte-common/bootimg.mk
 
 # Charger
 BOARD_BATTERY_DEVICE_NAME := "battery"
