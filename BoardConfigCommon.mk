@@ -27,6 +27,7 @@ BOARD_KERNEL_SEPARATED_DT := true
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01e00000
 BOARD_CUSTOM_BOOTIMG := true
 TARGET_KERNEL_SOURCE := kernel/samsung/msm8974
+KERNEL_TOOLCHAIN_PREFIX := arm-linux-androideabi-
 
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 131072
