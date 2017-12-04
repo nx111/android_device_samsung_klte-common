@@ -52,6 +52,7 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_RECOVERY_SWIPE := true
 TARGET_RECOVERY_FSTAB := device/samsung/klte-common/recovery.fstab
 TARGET_RECOVERY_DEVICE_DIRS := device/samsung/klte-common
+LZMA_RAMDISK_TARGETS := recovery
 
 # TWRP specific build flags
 TW_THEME := portrait_hdpi
