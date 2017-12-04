@@ -35,7 +35,7 @@ MR_DEVICE_HOOKS_VER := 4
 MR_FSTAB := device/samsung/klte-common/multirom/mrom.fstab
 MR_USE_MROM_FSTAB := true
 
-MR_DEVICE_VARIANTS := klte kltexx kltelra kltetmo kltecan klteatt klteub klteacg kltezn kltezm klteduos kltekdi kltekor kltektt kltelgt klteskt
+MR_DEVICE_VARIANTS := klte kltexx kltelra kltetmo kltecan kltechn kltechnduo klteatt klteub klteacg kltezn kltezm klteduos kltekdi kltekor kltektt kltelgt klteskt
 
 # not just yet :(
 MR_KEXEC_MEM_MIN := 0x02c00000
