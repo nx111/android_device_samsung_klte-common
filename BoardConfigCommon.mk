@@ -35,6 +35,7 @@ BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01e00000
 BOARD_CUSTOM_BOOTIMG := true
 BOARD_CUSTOM_BOOTIMG_MK := hardware/samsung/mkbootimg.mk
 TARGET_KERNEL_SOURCE := kernel/samsung/msm8974
+LZMA_RAMDISK_TARGETS := recovery
 
 # Audio
 BOARD_HAVE_NEW_QCOM_CSDCLIENT := true
