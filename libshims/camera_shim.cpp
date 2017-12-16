@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+extern "C" {
 // rt hdr
 const char *_ZN7android16CameraParameters10KEY_RT_HDRE = "rt-hdr";
 const char *_ZN7android16CameraParameters20KEY_SUPPORTED_RT_HDRE = "rt-hdr-values";
@@ -31,3 +32,4 @@ const char *_ZN7android16CameraParameters25KEY_DYNAMIC_RANGE_CONTROLE = "dynamic
 const char *_ZN7android16CameraParameters35KEY_SUPPORTED_DYNAMIC_RANGE_CONTROLE = "dynamic-range-control-values";
 const char *_ZN7android16CameraParameters7DRC_OFFE = "off";
 const char *_ZN7android16CameraParameters6DRC_ONE = "on";
+}
